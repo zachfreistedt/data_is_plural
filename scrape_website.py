@@ -41,7 +41,8 @@ def process_link(link):
         data_dict[date.isoformat()]['Edition Datasets'][f'Dataset {idx + 1}'] = {
             'Headline': headline,
             'Description': description,
-            'Dataset Links': links_in_p
+            'Dataset Links': links_in_p,
+            'Key': headline + str(date)
         }
 
 def get_data():

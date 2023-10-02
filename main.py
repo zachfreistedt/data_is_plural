@@ -48,18 +48,19 @@ for date, edition_data in data.items():
         if search_headline_query.lower() in dataset_info["Headline"].lower() and search_desc_query.lower() in dataset_info["Description"].lower():
             filtered_data.append((date, dataset_name, dataset_info))
 
+if search_headline_query == '' and search_desc_query == '':
+    used_data = all_data
+elif search_headline_query or search_desc_query:
+    used_data = filtered_data
 
 with col1:
     st.subheader('Available Datasets')
-    if not search_headline_query and not search_desc_query:
-        used_data = all_data
-    elif search_headline_query or search_desc_query:
-        used_data = filtered_data
+
     st.write(f"Found {len(used_data)} results:")
     selected_datasets = []
     for date, dataset_name, dataset_info in used_data:
         # Add a checkbox for each dataset
-        checkbox_selected = st.checkbox(f"**{dataset_info['Headline']}**", key=dataset_info['Headline'])
+        checkbox_selected = st.checkbox(f"**{dataset_info['Headline']}**", key=(dataset_info['Key']))
         if checkbox_selected:
             selected_datasets.append((date, dataset_name, dataset_info))
         st.write(f"Edition: {date}")
